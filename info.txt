@@ -1,0 +1,17 @@
+video lesson - https://www.youtube.com/watch?v=f55qeKGgB_M&list=PLZujuNZ8zXtlt-KEZRb9WN5AnlU2L5XEw&index=4
+need install npm, node
+check version : 
+	npm -v
+	node -v
+
+create project:
+	npx create-react-app social-media-website
+	npx create-react-app .
+
+run in debug mode:
+	npm start
+
+test json API :
+	https://catfact.ninja/fact
+	https://api.agify.io/?name=buben
+	https://excuser-three.vercel.app/

@@ -1,0 +1,178 @@
+include CSS:
+a) file : App.module.css 
+   include inro js :  import styles from './App.module.css';
+   usage : <h1 className={styles.name}></h1>
+b) file : App.css
+    include : import './App.css';
+    usage : <div classname="App"></div>
+-------------------------------------------
+array : 
+    const names = ["Pedro", "Jake", "Jessica", "Mike", "Dustin", "Bob"];
+-------------------------------------------
+objects array: 
+    const users = [
+        {name: "Pedro", age: "21"},
+        {name: "Jake", age: "21"},
+        {name: "Jessica", age: "21"},
+    ]
+-------------------------------------------
+map and iterate by array :
+    <div className='App'>
+        {users.map((user,key) => {
+        return <h1 key={key}>name : {user.name}, age : {user.age}</h1>
+      })}
+    </div>
+-------------------------------------------
+create component : 
+    const User = (props) => {
+        return (<h1> {props.name}, {props.age} </h1>)
+    }
+using component : 
+    <User name = {user.name} age = {user.age}/>
+
+-------------------------------------------------
+component in own file : 
+    a) create file : User.js
+    b) add component with keyword export :
+        export const User = (props) => {
+            return (<h1> {props.name}, {props.age} </h1>)
+        }
+    c) include User.js in App.js file : import { User } from './User';
+--------------------------------------------------- 
+
+list filter example :
+<div>
+  {names.filter(name => name.includes('J')).map(filteredName => (
+    <li>
+      {filteredName}
+    </li>
+  ))}
+</div>
+---------------------------------------------------
+if examples : 
+<div>
+  {planets.map((planet, key) => {
+    if(planet.isGasPlanet) return <h1>{planet.name}></h1>
+  })}
+</div>
+
+<div>
+  {planets.map((planet, key) =>  !planet.isGasPlanet && return <h1>{planet.name}></h1>
+  )}
+</div>
+---------------------------------------------------
+
+set state examples :
+import { useState } from "react";
+
+function App() {
+  const [age, setAge] = useState(0);
+  const increaseAge =() => {
+    console.log(age)
+    setAge(age + 1)
+  }
+
+  return (
+    <div className="App">
+         {age} <button onClick={increaseAge}>Increase Age</button>
+    </div>
+  );
+}
+
+------------
+  const [inputValue, setInputValue] = useState("");
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  }
+
+  return (
+      <div className="App">
+        <input type="text" onChange={handleInputChange}/>
+        {inputValue}
+      </div>
+  );
+------------
+  const [showText, setShowText] = useState(false);
+  const changeShowText = (event) => {
+    setShowText(!showText);
+  }
+
+  return (
+    <div>
+      <div>
+        <button onClick={changeShowText}>Show/Hide text</button>
+         {showText && <div>SHOW THAT TEXT</div>} 
+      </div>
+    </div>
+  );
+
+  -----------
+
+  const [textColor, changeTextColor]=useState("red");
+  const changeColorAction = () => {
+    changeTextColor( textColor === "red"?"blue":"red")
+  } 
+
+  return (
+      <div>
+        <button onClick={changeColorAction}>Change text color</button>
+         <div style = {{color: textColor}}>CHANGE COLOR TEXT</div>
+      </div>
+  );
+----------------------------------------------------
+merge list and an element :
+    const newTodoList = [...todoList, newTaskName];
+
+-----------------------------------------------------
+
+send params into callback :
+    <button onClick={()=>deleteTask(params.id)}>remove</button>
+-----------------------------------------------------
+return same object but comleted: true:
+    return {...tasky, comleted: true}
+
+------------------------------------------------------
+components lifecycles :
+mounting
+updating
+unmounting
+
+import {useEffect} from "react"
+
+//useEffect - for call after every component mount/update
+ useEffect(() => {
+    console.log("COMPONENT MOUNTED");
+
+    return ()=>{
+        console.log("COMPONENT UNMOUNTED");
+    }
+ }, []) // if no [] - will be called for every update
+           [] - call only ones, 
+           [text] - only for const text 
+
+for correct work 
+<React.StrictMode> and </React.StrictMode> must be removed.
+StrictMode - makes mount + unmount + mount again
+
+---------------------------------------------------------
+
+get Data from API example :
+ a) fetch("https://catfact.ninja/fact")
+    .then((res)=>res.json())
+    .then((data)=>{
+         console.log(data)
+  })
+
+  b)install axios  : npm install axios
+    add import : import Axios from 'axios';
+    call function :
+        Axios.get("https://catfact.ninja/fact").then((res) => {
+            console.log(res.data);
+        });
+
+----------------------------------------------------------
+insert parans into query string :
+    a) Axios.get("https://api.agify.io/?name="+newInputName)
+    b) Axios.get(`https://api.agify.io/?name=${newInputName}`)
+    c) set newResponce.name if it's not null : <h1>Name : {newResponce?.name}</h1>
+
