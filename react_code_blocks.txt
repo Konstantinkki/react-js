@@ -176,3 +176,74 @@ insert parans into query string :
     b) Axios.get(`https://api.agify.io/?name=${newInputName}`)
     c) set newResponce.name if it's not null : <h1>Name : {newResponce?.name}</h1>
 
+-----------------------------------------------------------
+react dom : 
+    install lib : npm install react-router-dom
+    import : import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+    usage : 
+        <div className="App">
+          <Router>
+            <Routes>
+             <Route path='/' element={<Home/>}/>
+            </Routes>
+          </Router>
+        </div>
+
+-------------------------------------------------------------
+add Application context : 
+  1) in main file add : import { useState, createContext } from 'react'
+  2) under imports add export : export const AppContext = createContext();
+  3) wrap <Router> (or any components) by :
+     <AppContext.Provider value={{username, setUsernameFunc}}>
+     </AppContext.Provider>
+  4) in another js import :
+      import { useContext } from "react";
+      import { AppContext } from "../App";
+  5) restore constants : const {userName} = useContext(AppContext); 
+  --------------------------------------------------------------
+
+  using react http query : 
+  1) install lib : npm install @tanstack/react-query
+  2) import into main JS : 
+    import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+  3) init const inside of <App>
+
+    const client = new QueryClient();
+
+  or with params :   
+
+    const client = new QueryClient({defaultOptions:{
+      queries:{
+        refetchOnWindowFocus:false;
+      }
+    });
+  
+  4) wrap <Router> (or components) 
+    <QueryClientProvider client={client}>
+      ....
+    </QueryClientProvider>
+
+  5) in other files import :
+    import {useQuery} from '@tanstack/react-query'
+    import Axios from 'axios';
+  6) init const :
+      const {data, isLoading, isError, refetch} = useQuery(["cat"], () => {
+        return Axios.get("https://catfact.ninja/fact").then(res => res.data);
+      })
+  7) use data, isLoading, isError, refetch - refresh
+
+  ----------------------------------------------------------
+  react forms : 
+  //yup - fields validator
+  1) install libs : npm install react-hook-form yup
+  2) install : npm install @hookform/resolvers
+  excample : lesson 11_forms_in_react/components/Form.js
+
+  -----------------------------------------------------
+  set types for component properties:
+  1) install : npm install prop-types
+
+  -----------------------------------------------------
+  install redux : 
+    npm install @reduxjs/toolkit react-redux
+

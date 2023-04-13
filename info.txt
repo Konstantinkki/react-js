@@ -7,6 +7,7 @@ check version :
 create project:
 	npx create-react-app social-media-website
 	npx create-react-app .
+	npx create-react-app . --template typescript (create app with typescrips structure)
 
 run in debug mode:
 	npm start
